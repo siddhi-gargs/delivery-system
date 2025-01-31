@@ -17,35 +17,55 @@ const foodpreparedMsg = (orderDetails) => {
   return `Food is ready: { orderId: ${orderDetails.orderId}, foodDetails: ${orderDetails.foodDetails}}`;
 };
 
-const loggingDetils = (orderDetails, startTime, orderState) => {
-  display(`[${currentTime}] Delivering order...`);
-  display(`[${currentTime}] ${deliveredOrderMsg(orderDetails)}`);
+const loggingDetails = (orderDetails, startTime, orderState, funcMsg) => {
+  const currentTime = orderDetails.elapsedTime(startTime);
+  display(`[${currentTime}] ${orderState}`);
+  display(`[${currentTime}] ${funcMsg(orderDetails)}`);
 };
 
 const deliverOrder = (orderDetails, startTime) => {
   setTimeout(() => {
-    const currentTime = orderDetails.elapsedTime(startTime);
-    display(`[${currentTime}] Delivering order...`);
-    display(`[${currentTime}] ${deliveredOrderMsg(orderDetails)}`);
+    // const currentTime = orderDetails.elapsedTime(startTime);
+    // display(`[${currentTime}] Delivering order...`);
+    // display(`[${currentTime}] ${deliveredOrderMsg(orderDetails)}`);
+
+    loggingDetails(
+      orderDetails,
+      startTime,
+      "Delivering order...",
+      deliveredOrderMsg
+    );
   }, 4000);
 };
 
 const packOrder = (orderDetails, startTime) => {
   setTimeout(() => {
-    const currentTime = orderDetails.elapsedTime(startTime);
-    display(`[${currentTime}] Packing Order...`);
-    display(`[${currentTime}] ${packingOrderMsg(orderDetails)}`);
+    // const currentTime = orderDetails.elapsedTime(startTime);
+    // display(`[${currentTime}] Packing Order...`);
+    // display(`[${currentTime}] ${packingOrderMsg(orderDetails)}`);
 
+    loggingDetails(
+      orderDetails,
+      startTime,
+      "Packing Order...",
+      packingOrderMsg
+    );
     deliverOrder(orderDetails, startTime);
   }, 2000);
 };
 
-const preparing = (orderDetails, startTime) => {
+const prepareFood = (orderDetails, startTime) => {
   setTimeout(() => {
-    const currentTime = orderDetails.elapsedTime(startTime);
-    display(`[${currentTime}] Preparind Food..`);
-    display(`[${currentTime}] ${foodpreparedMsg(orderDetails)}`);
+    // const currentTime = orderDetails.elapsedTime(startTime);
+    // display(`[${currentTime}] Preparind Food..`);
+    // display(`[${currentTime}] ${foodpreparedMsg(orderDetails)}`);
 
+    loggingDetails(
+      orderDetails,
+      startTime,
+      "Preparind Food..",
+      foodpreparedMsg
+    );
     packOrder(orderDetails, startTime);
   }, 3000);
 };
@@ -62,7 +82,7 @@ const order = (startTime) => {
   setTimeout(() => {
     const currentTime = orderDetails.elapsedTime(startTime);
     display(`${currentTime} Order received: { orderId: 123 }`);
-    preparing(orderDetails, startTime);
+    prepareFood(orderDetails, startTime);
   }, 0);
 };
 
