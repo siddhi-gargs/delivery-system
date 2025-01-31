@@ -33,7 +33,7 @@ const packOrder = (orderDetails) => {
   }, 2000);
 };
 
-const orderCome = (orderDetails) => {
+const prepaing = (orderDetails) => {
   setTimeout(() => {
     const currentTime = orderDetails.elapsedTime();
     display(`[${currentTime}s] Preparind Food..`);
@@ -70,7 +70,7 @@ const order = () => {
     const currentTime = orderDetails.elapsedTime();
 
     display(`${currentTime} Order received: { orderId: 123 }`);
-    orderCome(orderDetails);
+    prepaing(orderDetails);
   }, 0);
 };
 
