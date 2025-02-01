@@ -17,7 +17,7 @@ const foodpreparedMsg = (orderDetails) => {
   return `Food is ready: { orderId: ${orderDetails.orderId}, foodDetails: ${orderDetails.foodDetails}}`;
 };
 
-const loggingDetails = (orderDetails, startTime, orderState, funcMsg) => {
+const logDetails = (orderDetails, startTime, orderState, funcMsg) => {
   const currentTime = orderDetails.elapsedTime(startTime);
   display(`[${currentTime}] ${orderState}`);
   display(`[${currentTime}] ${funcMsg(orderDetails)}`);
@@ -25,11 +25,7 @@ const loggingDetails = (orderDetails, startTime, orderState, funcMsg) => {
 
 const deliverOrder = (orderDetails, startTime) => {
   setTimeout(() => {
-    // const currentTime = orderDetails.elapsedTime(startTime);
-    // display(`[${currentTime}] Delivering order...`);
-    // display(`[${currentTime}] ${deliveredOrderMsg(orderDetails)}`);
-
-    loggingDetails(
+    logDetails(
       orderDetails,
       startTime,
       "Delivering order...",
@@ -40,32 +36,14 @@ const deliverOrder = (orderDetails, startTime) => {
 
 const packOrder = (orderDetails, startTime) => {
   setTimeout(() => {
-    // const currentTime = orderDetails.elapsedTime(startTime);
-    // display(`[${currentTime}] Packing Order...`);
-    // display(`[${currentTime}] ${packingOrderMsg(orderDetails)}`);
-
-    loggingDetails(
-      orderDetails,
-      startTime,
-      "Packing Order...",
-      packingOrderMsg
-    );
+    logDetails(orderDetails, startTime, "Packing Order...", packingOrderMsg);
     deliverOrder(orderDetails, startTime);
   }, 2000);
 };
 
 const prepareFood = (orderDetails, startTime) => {
   setTimeout(() => {
-    // const currentTime = orderDetails.elapsedTime(startTime);
-    // display(`[${currentTime}] Preparind Food..`);
-    // display(`[${currentTime}] ${foodpreparedMsg(orderDetails)}`);
-
-    loggingDetails(
-      orderDetails,
-      startTime,
-      "Preparind Food..",
-      foodpreparedMsg
-    );
+    logDetails(orderDetails, startTime, "Preparind Food..", foodpreparedMsg);
     packOrder(orderDetails, startTime);
   }, 3000);
 };
